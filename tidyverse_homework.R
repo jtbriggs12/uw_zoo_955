@@ -150,16 +150,16 @@ airports %>%
 #    most flights in 2013 (only include planes with all relevant information)?
 #    How many flights was it?
 
-planeflights <- left_join(flights, planes, level = 'tailnum')
 
-planeflights %>% 
+flights %>% 
+  left_join(planes, by = "tailnum") %>%
   filter(!is.na(manufacturer),
          !is.na(model),
-         !is.na(year),
+         !is.na(year.y),
          !is.na(type)) %>%
   group_by(tailnum) %>%
   count() %>%
   arrange(desc(n))
 
 planes %>%
-  filter(tailnum == 'N354JB')
+  filter(tailnum == 'N711MQ')
